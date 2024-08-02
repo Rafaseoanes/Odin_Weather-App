@@ -1,6 +1,7 @@
 import "./style.css";
 import { getData } from "./getData.js";
 
+
 // document.querySelector('#app').innerHTML = `
 
 // `
@@ -8,16 +9,21 @@ import { getData } from "./getData.js";
 
 const submitBtn = document.getElementById("submitBtn");
 const locationInput = document.getElementById("locationInput");
+const temp = document.getElementById("temp");
+const locationName = document.getElementById("locationName");
 
 submitBtn.addEventListener("click", (event) => {
   const userInput = locationInput.value;
-
-  async function parseData() {
-    const data = await getData(userInput);
-    console.log(data);
-  }
-  parseData()
+  parseData(userInput);
   event.preventDefault();
 });
 
+async function parseData(city = "londres") {
+  const data = await getData(city);
+  
+  temp.innerText = data.currentConditions.temp;
+  let cityName = data.resolvedAddress.split(",", 1);
+  locationName.innerText = cityName;
+}
 
+parseData();
