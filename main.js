@@ -21,6 +21,7 @@ submitBtn.addEventListener("click", (event) => {
 });
 
 async function parseData(city = "londres") {
+  temp.innerText = "⌛"
   const data = await getData(city);
 
   console.log(data);
